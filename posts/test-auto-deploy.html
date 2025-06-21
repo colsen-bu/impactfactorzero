@@ -8,22 +8,25 @@
     <meta name="description" content="Testing the new automatic deployment system with just markdown!">
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <h1><a href="../index.html" style="text-decoration: none; color: inherit;">My Blog</a></h1>
-            <nav class="nav">
-                <a href="../index.html">← Back to Home</a>
-            </nav>
-        </header>
+    <header>
+        <h1><a href="../index.html" style="text-decoration: none; color: inherit;">Impact Factor Zero</a></h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">← Back to Home</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <main>
-            <div class="post-with-toc">
+    <main>
+        <div class="post-with-toc">
                 <div class="post-content-wrapper">
                     <article class="post">
-                        <h1>Testing Auto-Deploy</h1>
-                        <div class="post-meta">
-                            Published on June 21, 2025
-                        </div>
+                        <header>
+                            <h1>Testing Auto-Deploy</h1>
+                            <div class="post-meta">
+                                Published on June 21, 2025
+                            </div>
+                        </header>
                         <div class="post-content">
                             <p>This post demonstrates the new simplified workflow! I'm writing this as a simple markdown file, and when I push to GitHub, it will automatically:</p>
 <h2 id="what-happens-automatically">What Happens Automatically</h2>
@@ -49,7 +52,7 @@
 <li><a href="https://github.com">Links work too</a></li>
 </ul>
 <h3 id="footnotes">Footnotes</h3>
-<p>This blog supports footnotes[^1] which are super useful for academic writing[^academic].</p>
+<p>This blog supports footnotes<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> which are super useful for academic writing<sup id="fnref:academic"><a class="footnote-ref" href="#fn:academic">2</a></sup>.</p>
 <h3 id="tables">Tables</h3>
 <table>
 <thead>
@@ -87,8 +90,17 @@
 <p>This makes blogging so much simpler and more enjoyable. You can focus on writing instead of managing build processes.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>If you can see this post on the live blog, then the automatic deployment is working perfectly! 🚀</p>
-<p>[^1]: Footnotes automatically get converted to clickable links with proper styling.</p>
-<p>[^academic]: Perfect for citations and additional context without cluttering the main text.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Footnotes automatically get converted to clickable links with proper styling.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:academic">
+<p>Perfect for citations and additional context without cluttering the main text.&#160;<a class="footnote-backref" href="#fnref:academic" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
                         </div>
                     </article>
                 </div>
@@ -105,13 +117,12 @@
 <li class=""><a href="#conclusion">Conclusion</a></li>
 </ul>
 </div>
-            </div>
-        </main>
+        </div>
+    </main>
 
-        <footer class="footer">
-            <p>&copy; 2025 My Blog. Built with Python and GitHub Pages.</p>
-        </footer>
-    </div>
+    <footer>
+        <p>&copy; 2025 Impact Factor Zero</p>
+    </footer>
     
     <script>
         // Highlight active TOC item on scroll

@@ -64,10 +64,12 @@ def create_html_post(title, content, metadata, slug):
         post_class = "post-with-toc"
         post_content = f'''                <div class="post-content-wrapper">
                     <article class="post">
-                        <h1>{html.escape(title)}</h1>
-                        <div class="post-meta">
-                            Published on {formatted_date}
-                        </div>
+                        <header>
+                            <h1>{html.escape(title)}</h1>
+                            <div class="post-meta">
+                                Published on {formatted_date}
+                            </div>
+                        </header>
                         <div class="post-content">
                             {content}
                         </div>
@@ -77,10 +79,12 @@ def create_html_post(title, content, metadata, slug):
     else:
         post_class = "post"
         post_content = f'''                <article class="post">
-                    <h1>{html.escape(title)}</h1>
-                    <div class="post-meta">
-                        Published on {formatted_date}
-                    </div>
+                    <header>
+                        <h1>{html.escape(title)}</h1>
+                        <div class="post-meta">
+                            Published on {formatted_date}
+                        </div>
+                    </header>
                     <div class="post-content">
                         {content}
                     </div>
@@ -96,24 +100,24 @@ def create_html_post(title, content, metadata, slug):
     <meta name="description" content="{html.escape(excerpt)}">
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <h1><a href="../index.html" style="text-decoration: none; color: inherit;">My Blog</a></h1>
-            <nav class="nav">
-                <a href="../index.html">← Back to Home</a>
-            </nav>
-        </header>
+    <header>
+        <h1><a href="../index.html" style="text-decoration: none; color: inherit;">Impact Factor Zero</a></h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">← Back to Home</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <main>
-            <div class="{post_class}">
+    <main>
+        <div class="{post_class}">
 {post_content}
-            </div>
-        </main>
+        </div>
+    </main>
 
-        <footer class="footer">
-            <p>&copy; 2025 My Blog. Built with Python and GitHub Pages.</p>
-        </footer>
-    </div>
+    <footer>
+        <p>&copy; 2025 Impact Factor Zero</p>
+    </footer>
     
     <script>
         // Highlight active TOC item on scroll
@@ -184,6 +188,13 @@ def process_markdown_files():
             # Extract metadata
             title = post.metadata.get('title', md_file.stem.replace('-', ' ').title())
             date = post.metadata.get('date', datetime.now().strftime('%Y-%m-%d'))
+            
+            # Ensure date is in string format for consistent handling
+            if isinstance(date, datetime):
+                date = date.strftime('%Y-%m-%d')
+            else:
+                date = str(date)
+                
             excerpt = post.metadata.get('excerpt', f'A blog post about {title.lower()}')
             slug = md_file.stem
             
@@ -192,7 +203,8 @@ def process_markdown_files():
                 'markdown.extensions.fenced_code',
                 'markdown.extensions.tables',
                 'markdown.extensions.toc',
-                'markdown.extensions.codehilite'
+                'markdown.extensions.codehilite',
+                'markdown.extensions.footnotes'  # Add footnotes support
             ])
             content = md.convert(post.content)
             
@@ -221,32 +233,34 @@ def process_markdown_files():
 
 def update_index(posts_data):
     """Update the index.html with all posts"""
-    # Sort posts by date (newest first) - convert all dates to strings first
+    # Sort posts by date (newest first) - improved date handling
     for post in posts_data:
         if isinstance(post['date'], datetime):
             post['date'] = post['date'].strftime('%Y-%m-%d')
         else:
             post['date'] = str(post['date'])
     
-    posts_data.sort(key=lambda x: x['date'], reverse=True)
+    # Sort by date (newest first) and then by title for consistent ordering
+    posts_data.sort(key=lambda x: (x['date'], x['title']), reverse=True)
     
-    # Generate posts HTML
+    # Generate posts HTML with proper post items structure
     posts_html = []
-    for post in posts_data:
+    for i, post in enumerate(posts_data):
         try:
             date_obj = datetime.strptime(str(post['date']), '%Y-%m-%d')
             formatted_date = date_obj.strftime('%B %d, %Y')
         except:
             formatted_date = str(post['date'])
         
-        post_html = f'''<h3><a href="posts/{post['filename']}">{html.escape(post['title'])}</a></h3>
-
-<p>{formatted_date}</p>
-
-<p>{html.escape(post['excerpt'])}</p>'''
+        # Add post-item class wrapper for proper styling and dividers
+        post_html = f'''                <article class="post-item">
+                    <h3><a href="posts/{post['filename']}">{html.escape(post['title'])}</a></h3>
+                    <div class="post-meta">{formatted_date}</div>
+                    <div class="post-excerpt">{html.escape(post['excerpt'])}</div>
+                </article>'''
         posts_html.append(post_html)
     
-    posts_section = '\n\n\n'.join(posts_html)
+    posts_section = '\n'.join(posts_html)
     
     # Read current index.html or create a template
     index_template = '''<!DOCTYPE html>
@@ -258,21 +272,19 @@ def update_index(posts_data):
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <h1>Impact Factor Zero</h1>
-        </header>
+    <header>
+        <h1>Impact Factor Zero</h1>
+    </header>
 
-        <main>
-            <div class="post-list">
+    <main>
+        <div class="post-list">
 {posts_section}
-            </div>
-        </main>
+        </div>
+    </main>
 
-        <footer class="footer">
-            <p>&copy; 2025 Impact Factor Zero</p>
-        </footer>
-    </div>
+    <footer>
+        <p>&copy; 2025 Impact Factor Zero</p>
+    </footer>
 </body>
 </html>'''
     

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Footnotes</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <meta name="description" content="Testing footnote functionality in the blog">
+</head>
+<body>
+    <header>
+        <h1><a href="../index.html" style="text-decoration: none; color: inherit;">Impact Factor Zero</a></h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">← Back to Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="post-with-toc">
+                <div class="post-content-wrapper">
+                    <article class="post">
+                        <header>
+                            <h1>Testing Footnotes</h1>
+                            <div class="post-meta">
+                                Published on June 22, 2025
+                            </div>
+                        </header>
+                        <div class="post-content">
+                            <h1 id="testing-footnotes">Testing Footnotes</h1>
+<p>This is a blog post with footnotes<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. Footnotes are useful for adding additional information without disrupting the main flow of text<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>.</p>
+<p>Here's another paragraph with a different footnote<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>.</p>
+<h2 id="more-content">More Content</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. This sentence has a footnote<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>This is the first footnote with some additional information.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Footnotes can contain longer explanations and even links like <a href="https://example.com">this one</a>.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>This is the third footnote.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>This is the fourth footnote with more detailed information about the topic being discussed.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                        </div>
+                    </article>
+                </div>
+                <div class="table-of-contents">
+<h3>Table of Contents</h3>
+<ul>
+<li class=""><a href="#more-content">More Content</a></li>
+</ul>
+</div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Impact Factor Zero</p>
+    </footer>
+    
+    <script>
+        // Highlight active TOC item on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const tocLinks = document.querySelectorAll('.table-of-contents a');
+            const headers = document.querySelectorAll('.post h2, .post h3, .post h4');
+            
+            if (tocLinks.length === 0 || headers.length === 0) return;
+            
+            function updateActiveTocItem() {
+                let activeHeader = null;
+                const scrollPos = window.scrollY + 100; // Offset for better UX
+                
+                for (let i = headers.length - 1; i >= 0; i--) {
+                    if (headers[i].offsetTop <= scrollPos) {
+                        activeHeader = headers[i];
+                        break;
+                    }
+                }
+                
+                // Remove active class from all links
+                tocLinks.forEach(link => link.classList.remove('active'));
+                
+                // Add active class to current section
+                if (activeHeader) {
+                    const activeLink = document.querySelector(`.table-of-contents a[href="#${activeHeader.id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            }
+            
+            // Update on scroll
+            window.addEventListener('scroll', updateActiveTocItem);
+            updateActiveTocItem(); // Initial update
+        });
+    </script>
+</body>
+</html>
