@@ -1,0 +1,371 @@
+/* Main Blog Stylesheet */
+:root {
+    --primary-color: #000;
+    --text-color: #333;
+    --light-gray: #666;
+    --border-color: #eee;
+    --background-color: #fff;
+    --max-width: 800px;
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.header {
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.header p {
+    color: var(--light-gray);
+    font-size: 16px;
+}
+
+.nav {
+    margin-top: 20px;
+}
+
+.nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin-right: 20px;
+    font-weight: 500;
+}
+
+.nav a:hover {
+    color: var(--primary-color);
+}
+
+/* Posts */
+.post-list {
+    margin-bottom: 40px;
+}
+
+.post-item {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.post-item:last-child {
+    border-bottom: none;
+}
+
+.post-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.post-title a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.post-title a:hover {
+    color: var(--primary-color);
+}
+
+.post-meta {
+    color: var(--light-gray);
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.post-excerpt {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.read-more {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+/* Table of Contents */
+.post-with-toc {
+    display: grid;
+    grid-template-columns: 1fr 250px;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.post-content-wrapper {
+    min-width: 0; /* Prevents grid overflow */
+}
+
+.table-of-contents {
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.table-of-contents h3 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.table-of-contents ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.table-of-contents li {
+    margin: 0;
+    line-height: 1.4;
+}
+
+.table-of-contents a {
+    display: block;
+    padding: 6px 0;
+    color: var(--light-gray);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    padding-left: 12px;
+    transition: all 0.2s ease;
+}
+
+.table-of-contents a:hover {
+    color: var(--primary-color);
+    border-left-color: var(--border-color);
+}
+
+.table-of-contents a.active {
+    color: var(--primary-color);
+    border-left-color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* Nested headers in TOC */
+.table-of-contents li.h3 {
+    padding-left: 15px;
+}
+
+.table-of-contents li.h4 {
+    padding-left: 30px;
+}
+
+/* Mobile responsive - hide TOC on small screens */
+@media (max-width: 900px) {
+    .post-with-toc {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .table-of-contents {
+        order: -1; /* Show TOC before content on mobile */
+        position: static;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .table-of-contents {
+        display: none; /* Hide TOC on very small screens */
+    }
+    
+    .post-with-toc {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Add some space above headers for better anchor positioning */
+.post h2, .post h3, .post h4 {
+    scroll-margin-top: 20px;
+}
+
+/* Individual Post */
+.post {
+    margin-bottom: 40px;
+}
+
+.post h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.post h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 30px 0 15px 0;
+}
+
+.post h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 25px 0 12px 0;
+}
+
+.post p {
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+.post ul, .post ol {
+    margin-bottom: 20px;
+    padding-left: 30px;
+}
+
+.post li {
+    margin-bottom: 8px;
+}
+
+.post blockquote {
+    border-left: 4px solid var(--border-color);
+    padding-left: 20px;
+    margin: 25px 0;
+    font-style: italic;
+    color: var(--light-gray);
+}
+
+.post code {
+    background-color: #f5f5f5;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Monaco', 'Menlo', monospace;
+    font-size: 0.9em;
+}
+
+.post pre {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+.post pre code {
+    background: none;
+    padding: 0;
+}
+
+.post img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin: 20px 0;
+}
+
+/* Footnotes */
+.footnotes {
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: var(--light-gray);
+}
+
+.footnotes hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 20px 0;
+}
+
+.footnotes ol {
+    padding-left: 20px;
+}
+
+.footnotes li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.footnotes a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.footnotes a:hover {
+    text-decoration: underline;
+}
+
+sup a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+sup a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+    border-top: 1px solid var(--border-color);
+    padding: 40px 0;
+    margin-top: 60px;
+    text-align: center;
+    color: var(--light-gray);
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .header {
+        padding: 30px 0;
+    }
+    
+    .header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .post h1 {
+        font-size: 2rem;
+    }
+    
+    .post h2 {
+        font-size: 1.5rem;
+    }
+    
+    .nav a {
+        margin-right: 15px;
+    }
+}
