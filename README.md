@@ -52,12 +52,6 @@ Hello world! This is my first automatically published blog post.
 The rest happens automatically via GitHub Actions.
 ```
 
-**Method 2: Use the Web Editor**
-- Open `editor.html` in your browser
-- Write your post with rich formatting
-- Download the markdown file
-- Add it to your repo and push
-
 ### Deploy Your Blog
 
 ```bash

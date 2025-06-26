@@ -1,3 +1,9 @@
 # GitHub Actions dependencies for automatic blog building
 python-frontmatter==1.1.0
 markdown==3.5.2
+
+# Additional useful packages for blog development
+pygments>=2.15.0  # Syntax highlighting for code blocks
+pathlib>=1.0.0    # Path handling (usually built-in but explicit for clarity)
+beautifulsoup4>=4.12.0  # For HTML parsing if needed
+lxml>=4.9.0       # XML/HTML parser for beautifulsoup4

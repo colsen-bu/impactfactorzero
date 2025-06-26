@@ -6,39 +6,46 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    line-height: 1.6;
-    color: #000;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #333;
     background-color: #fff;
-    font-size: 16px;
+    font-size: 18px;
     margin: 0 auto;
     padding: 2rem;
 }
 
+/* Main container for all content */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
 /* Homepage content - centered and constrained width */
 .post-list {
-    max-width: 900px;
-    margin: 2rem auto 0 auto;
+    max-width: 800px;
+    margin: 3rem auto 0 auto;
 }
 
 /* Individual post content - use full width */
 .post, .post-with-toc {
-    max-width: none;
-    margin-top: 1rem;
+    max-width: 800px; /* Constrain reading width */
+    margin: 3rem auto 0 auto; /* Center the post content */
 }
 
 /* Header */
 header {
-    padding: 3rem 0 2rem 0;
+    padding: 2rem 0;
     text-align: center;
-    border-bottom: none;
-    margin-bottom: 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 2rem;
 }
 
 header h1 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
     color: #000;
 }
 
@@ -56,13 +63,15 @@ nav ul {
 }
 
 nav a {
-    color: #000;
-    text-decoration: underline;
-    font-size: 14px;
+    color: #555;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s ease;
 }
 
 nav a:hover {
-    text-decoration: none;
+    color: #000;
+    text-decoration: underline;
 }
 
 /* Main content */
@@ -70,46 +79,10 @@ main {
     padding: 0;
 }
 
-/* Post list on homepage - now handled by centering above */
-
-.post-list h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-    margin-top: 1.5rem;
-}
-
-.post-list h3:first-child {
-    margin-top: 0;
-}
-
-.post-list h3 a {
-    color: #000;
-    text-decoration: underline;
-}
-
-.post-list h3 a:hover {
-    text-decoration: none;
-}
-
-.post-list p {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 0.5rem;
-    margin-top: 0.25rem;
-}
-
-.post-list p:last-of-type {
-    font-size: 15px;
-    color: #333;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #eee;
-}
-
+/* Post list on homepage */
 .post-item {
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
     border-bottom: 1px solid #eee;
 }
 
@@ -118,7 +91,7 @@ main {
 }
 
 .post-item h3 {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
     text-align: left;
@@ -126,86 +99,97 @@ main {
 
 .post-item h3 a {
     color: #000;
-    text-decoration: underline;
-}
-
-.post-item h3 a:hover {
     text-decoration: none;
 }
 
+.post-item h3 a:hover {
+    text-decoration: underline;
+}
+
 .post-item .post-meta {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 1rem;
     text-align: left;
 }
 
 .post-item .post-excerpt {
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1.6;
-    color: #333;
+    color: #555;
     text-align: left;
 }
 
-/* Individual post pages - full width styling handled above */
+/* Individual post pages */
+.post header {
+    border-bottom: none;
+    margin-bottom: 1rem;
+    padding: 0;
+    text-align: left;
+}
 
 .post header h1 {
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    line-height: 1.3;
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
     text-align: left;
 }
 
 .post-meta {
-    color: #666;
-    font-size: 14px;
-    margin-bottom: 2rem;
+    color: #777;
+    font-size: 0.9rem;
+    margin-bottom: 3rem;
     text-align: left;
 }
 
 .post-content {
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
 }
 
 .post-content h2 {
-    font-size: 1.3rem;
+    font-size: 1.8rem;
     font-weight: 600;
-    margin: 2rem 0 1rem 0;
+    margin: 3rem 0 1.5rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
     text-align: left;
 }
 
 .post-content h3 {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     font-weight: 600;
-    margin: 1.5rem 0 0.5rem 0;
+    margin: 2.5rem 0 1rem 0;
     text-align: left;
 }
 
 .post-content p {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .post-content a {
-    color: #000;
-    text-decoration: underline;
-}
-
-.post-content a:hover {
+    color: #007bff;
     text-decoration: none;
 }
 
-/* Media - minimal styling */
+.post-content a:hover {
+    text-decoration: underline;
+}
+
+/* Media - improved styling */
 figure {
-    margin: 2rem 0;
+    margin: 3rem 0;
+    text-align: center;
 }
 
 img {
+    display: block;
     max-width: 100%;
     height: auto;
-    display: block;
-    margin: 0 auto;
+    margin: 0 auto; /* Center image within figure */
+    border-radius: 8px; /* Softer corners */
 }
 
 video {
@@ -214,10 +198,11 @@ video {
 }
 
 figcaption {
-    margin-top: 0.5rem;
-    font-size: 14px;
-    color: #666;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #777;
     text-align: center;
+    line-height: 1.5;
 }
 
 /* Navigation */
@@ -239,74 +224,22 @@ figcaption {
 /* Footer */
 footer {
     text-align: center;
-    padding: 2rem 0;
-    color: #666;
-    font-size: 14px;
+    padding: 3rem 0;
+    color: #888;
+    font-size: 0.9rem;
     border-top: 1px solid #eee;
-    margin-top: 4rem;
+    margin-top: 5rem;
 }
 
-/* Image sizing utilities */
-.img-small { 
-    max-width: 200px; 
-    height: auto; 
-}
-
-.img-medium { 
-    max-width: 400px; 
-    height: auto; 
-}
-
-.img-large { 
-    max-width: 600px; 
-    height: auto; 
-}
-
-.img-full { 
-    max-width: 100%; 
-    height: auto; 
-}
-
-.img-half { 
-    max-width: 50%; 
-    height: auto; 
-}
-
-.img-third { 
-    max-width: 33%; 
-    height: auto; 
-}
-
-/* Center images */
-.img-center {
-    display: block;
-    margin: 0 auto;
-}
-
-/* Image with caption styling */
-.img-caption {
-    text-align: center;
-    margin: 20px 0;
-}
-
-.img-caption img {
-    display: block;
-    margin: 0 auto 10px auto;
-}
-
-.img-caption p {
-    font-style: italic;
-    color: #666;
-    font-size: 0.9em;
-    margin: 0;
-}
+/* Remove duplicated and unused styles */
+/* .img-caption, img + p em can be removed as we now use figure/figcaption */
 
 /* Footnotes */
 .footnote {
-    margin-top: 2rem;
-    padding-top: 1rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
     border-top: 1px solid #eee;
-    font-size: 0.9em;
+    font-size: 0.9rem;
     color: #666;
 }
 
@@ -320,8 +253,8 @@ footer {
 }
 
 .footnote li {
-    margin-bottom: 0.5rem;
-    line-height: 1.5;
+    margin-bottom: 1rem;
+    line-height: 1.6;
 }
 
 .footnote p {
@@ -330,21 +263,26 @@ footer {
 }
 
 .footnote a {
-    color: #000;
-    text-decoration: underline;
-    font-weight: 500;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: normal;
 }
 
 .footnote a:hover {
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 /* Footnote references in text */
+sup {
+    line-height: 0; /* prevent sup from affecting line-height */
+}
+
 sup a {
-    color: #000;
+    color: #007bff;
     text-decoration: none;
     font-weight: 500;
     font-size: 0.8em;
+    vertical-align: super;
 }
 
 sup a:hover {
@@ -354,29 +292,31 @@ sup a:hover {
 /* Table of Contents */
 .post-with-toc {
     display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: 50px;
+    grid-template-columns: 1fr 300px; /* Give TOC a bit more space */
+    gap: 60px;
     margin-bottom: 40px;
+    max-width: 1200px; /* Allow wider layout for TOC */
 }
 
 .post-content-wrapper {
     min-width: 0; /* Prevents grid overflow */
+    max-width: 800px; /* Constrain reading width */
 }
 
 .table-of-contents {
     position: sticky;
-    top: 20px;
+    top: 40px;
     height: fit-content;
-    padding: 20px;
-    background: #f9f9f9;
+    padding: 25px;
+    background: #fdfdfd;
     border: 1px solid #eee;
-    border-radius: 6px;
-    font-size: 14px;
+    border-radius: 8px;
+    font-size: 0.9rem;
 }
 
 .table-of-contents h3 {
-    margin: 0 0 15px 0;
-    font-size: 16px;
+    margin: 0 0 20px 0;
+    font-size: 1.1rem;
     font-weight: 600;
     color: #000;
 }
@@ -389,50 +329,51 @@ sup a:hover {
 
 .table-of-contents li {
     margin: 0;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 .table-of-contents a {
     display: block;
-    padding: 6px 0;
+    padding: 8px 0;
     color: #666;
     text-decoration: none;
-    border-left: 2px solid transparent;
-    padding-left: 12px;
+    border-left: 3px solid transparent;
+    padding-left: 15px;
     transition: all 0.2s ease;
 }
 
 .table-of-contents a:hover {
     color: #000;
-    border-left-color: #eee;
+    border-left-color: #ccc;
 }
 
 .table-of-contents a.active {
     color: #000;
     border-left-color: #000;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 /* Nested headers in TOC */
-.table-of-contents li.h3 {
-    padding-left: 15px;
-}
-
-.table-of-contents li.h4 {
+.table-of-contents li.h3 a {
     padding-left: 30px;
 }
 
+.table-of-contents li.h4 a {
+    padding-left: 45px;
+}
+
 /* Mobile responsive - hide TOC on small screens */
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
     .post-with-toc {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 30px;
+        max-width: 800px; /* Revert to single column max-width */
     }
     
     .table-of-contents {
         order: -1; /* Show TOC before content on mobile */
         position: static;
-        margin-bottom: 20px;
+        margin-bottom: 2rem;
     }
 }
 
@@ -453,29 +394,39 @@ html {
 
 /* Add some space above headers for better anchor positioning */
 .post h2, .post h3, .post h4 {
-    scroll-margin-top: 20px;
+    scroll-margin-top: 40px;
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
     body {
-        padding: 1rem;
+        padding: 1.5rem;
+        font-size: 16px;
+    }
+    
+    .container {
+        padding: 0 1rem;
     }
     
     .post-list {
         max-width: none;
-        margin: 1rem 0 0 0;
+        margin: 2rem 0 0 0;
     }
     
     header {
-        padding: 2rem 0 1rem 0;
+        padding: 2rem 0;
+        margin-bottom: 1rem;
     }
     
     header h1 {
-        font-size: 1.5rem;
+        font-size: 2rem;
+    }
+    
+    .post header h1 {
+        font-size: 2.2rem;
     }
     
     nav ul {
-        gap: 1rem;
+        gap: 1.5rem;
     }
 }

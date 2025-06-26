@@ -171,10 +171,14 @@ def process_markdown_files():
     
     # Recursively find all .md files in the entire repository
     for file in Path('.').rglob('*.md'):
-        # Skip documentation files and files in .github directory
-        if (file.name not in ['README.md'] and 
+        # Skip documentation files, .github directory, virtual environments, and package directories
+        if (file.name not in ['README.md', 'PYTHON_SETUP.md'] and
             '.github' not in str(file) and
-            '.git' not in str(file)):
+            '.git' not in str(file) and
+            'venv' not in str(file) and
+            'env' not in str(file) and
+            'site-packages' not in str(file) and
+            '__pycache__' not in str(file)):
             markdown_files.append(file)
     
     for md_file in markdown_files:
@@ -195,7 +199,9 @@ def process_markdown_files():
             else:
                 date = str(date)
                 
-            excerpt = post.metadata.get('excerpt', f'A blog post about {title.lower()}')
+            # Ensure title is a string before calling lower()
+            title_str = str(title) if title else 'untitled'
+            excerpt = post.metadata.get('excerpt', f'A blog post about {title_str.lower()}')
             slug = md_file.stem
             
             # Convert markdown to HTML
@@ -207,6 +213,13 @@ def process_markdown_files():
                 'markdown.extensions.footnotes'  # Add footnotes support
             ])
             content = md.convert(post.content)
+            
+            # Post-process to wrap images and captions in <figure>
+            # This regex looks for a paragraph containing only an image,
+            # followed by a paragraph containing only an italicized string.
+            pattern = re.compile(r'<p>(<img[^>]+>)</p>\s*<p><em>([^<]+)</em></p>')
+            replacement = r'<figure>\1<figcaption>\2</figcaption></figure>'
+            content = pattern.sub(replacement, content)
             
             # Create HTML file
             html_content = create_html_post(title, content, post.metadata, slug)
@@ -262,7 +275,7 @@ def update_index(posts_data):
     
     posts_section = '\n'.join(posts_html)
     
-    # Read current index.html or create a template
+    # Always regenerate index.html from template
     index_template = '''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -288,35 +301,10 @@ def update_index(posts_data):
 </body>
 </html>'''
     
-    # Try to read existing index.html and preserve custom content
-    if os.path.exists('index.html'):
-        try:
-            with open('index.html', 'r', encoding='utf-8') as f:
-                existing_content = f.read()
-            
-            # Replace the post-list section - more flexible regex
-            pattern = r'(<div class="post-list">\s*)(.*?)(\s*</div>\s*</main>)'
-            replacement = f'\\1\n{posts_section}\n            \\3'
-            
-            new_content = re.sub(pattern, replacement, existing_content, flags=re.DOTALL)
-            
-            if new_content != existing_content:
-                with open('index.html', 'w', encoding='utf-8') as f:
-                    f.write(new_content)
-                print("Updated existing index.html")
-            else:
-                print("No changes needed to index.html")
-        except Exception as e:
-            print(f"Error updating existing index.html: {e}")
-            # Fall back to template
-            with open('index.html', 'w', encoding='utf-8') as f:
-                f.write(index_template.format(posts_section=posts_section))
-            print("Created new index.html from template")
-    else:
-        # Create new index.html
-        with open('index.html', 'w', encoding='utf-8') as f:
-            f.write(index_template.format(posts_section=posts_section))
-        print("Created new index.html")
+    # Generate fresh index.html every time
+    with open('index.html', 'w', encoding='utf-8') as f:
+        f.write(index_template.format(posts_section=posts_section))
+    print("Regenerated index.html")
 
 def main():
     print("🚀 Building blog...")
