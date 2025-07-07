@@ -7,7 +7,7 @@ excerpt: "The current hype cycle might make you believe otherwise, but accelerat
 ![Alt text](../images/ComfyUI_00015_.png)
 *The current hype cycle might make you believe otherwise, but accelerated learning has fundamental limits when applied to Biology.*
 
-Many new companies in all industries today are built around artificial intelligence (AI)[^1]. This gargantuan shift in 
+Many new companies in all industries today are built around artificial intelligence (AI)[^1].
 
 
 
