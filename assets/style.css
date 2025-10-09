@@ -84,10 +84,25 @@ main {
     margin-bottom: 3rem;
     padding-bottom: 2rem;
     border-bottom: 1px solid #eee;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
 }
 
 .post-item:last-child {
     border-bottom: none;
+}
+
+.post-item .post-thumbnail {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.post-item-content {
+    flex: 1;
 }
 
 .post-item h3 {

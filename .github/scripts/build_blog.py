@@ -67,7 +67,7 @@ def create_html_post(title, content, metadata, slug):
                         <header>
                             <h1>{html.escape(title)}</h1>
                             <div class="post-meta">
-                                Published on {formatted_date}
+                                Published on {formatted_date} by Christopher Olsen
                             </div>
                         </header>
                         <div class="post-content">
@@ -82,7 +82,7 @@ def create_html_post(title, content, metadata, slug):
                     <header>
                         <h1>{html.escape(title)}</h1>
                         <div class="post-meta">
-                            Published on {formatted_date}
+                            Published on {formatted_date} by Christopher Olsen
                         </div>
                     </header>
                     <div class="post-content">
@@ -221,6 +221,18 @@ def process_markdown_files():
             replacement = r'<figure>\1<figcaption>\2</figcaption></figure>'
             content = pattern.sub(replacement, content)
             
+            # Extract first image for the index page
+            first_image = None
+            img_match = re.search(r'<img[^>]+src="([^"]+)"', content)
+            if img_match:
+                img_src = img_match.group(1)
+                # Convert relative path from post to work from index.html
+                # Posts use ../images/, index needs images/
+                if img_src.startswith('../images/'):
+                    first_image = img_src.replace('../images/', 'images/')
+                else:
+                    first_image = img_src
+            
             # Create HTML file
             html_content = create_html_post(title, content, post.metadata, slug)
             html_file = f'posts/{slug}.html'
@@ -234,7 +246,8 @@ def process_markdown_files():
                 'date': date,
                 'excerpt': excerpt,
                 'slug': slug,
-                'filename': f'{slug}.html'
+                'filename': f'{slug}.html',
+                'image': first_image
             })
             
             print(f"Created {html_file}")
@@ -265,11 +278,19 @@ def update_index(posts_data):
         except:
             formatted_date = str(post['date'])
         
+        # Add image if available
+        image_html = ''
+        if post.get('image'):
+            image_html = f'<img src="{post["image"]}" alt="{html.escape(post["title"])}" class="post-thumbnail">'
+        
         # Add post-item class wrapper for proper styling and dividers
         post_html = f'''                <article class="post-item">
-                    <h3><a href="posts/{post['filename']}">{html.escape(post['title'])}</a></h3>
-                    <div class="post-meta">{formatted_date}</div>
-                    <div class="post-excerpt">{html.escape(post['excerpt'])}</div>
+                    {image_html}
+                    <div class="post-item-content">
+                        <h3><a href="posts/{post['filename']}">{html.escape(post['title'])}</a></h3>
+                        <div class="post-meta">{formatted_date} by Christopher Olsen</div>
+                        <div class="post-excerpt">{html.escape(post['excerpt'])}</div>
+                    </div>
                 </article>'''
         posts_html.append(post_html)
     
